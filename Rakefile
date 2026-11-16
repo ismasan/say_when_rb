@@ -9,7 +9,7 @@ require "rb_sys/extensiontask"
 
 task build: :compile
 
-GEMSPEC = Gem::Specification.load("say_when.gemspec")
+GEMSPEC = Gem::Specification.load("say_when_rb.gemspec")
 
 RbSys::ExtensionTask.new("say_when", GEMSPEC) do |ext|
   ext.lib_dir = "lib/say_when"

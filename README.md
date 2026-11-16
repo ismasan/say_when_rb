@@ -4,11 +4,13 @@ Ruby bindings for the [say-when](https://crates.io/crates/say-when) Rust crate (
 
 ## Installation
 
-Building from source needs Rust ≥ 1.90 (the crate uses edition 2024).
-
 ```ruby
-gem "say_when", path: "path/to/say_when" # not yet published
+gem "say_when_rb"
 ```
+
+The gem is published as `say_when_rb` because the `say_when` name is taken, but you still `require "say_when"` and use the `SayWhen` module.
+
+Precompiled gems are published for Linux, macOS and Windows. On other platforms, or Rubies without a precompiled build, the gem compiles from source, which needs Rust ≥ 1.90 (the crate uses edition 2024).
 
 ## Usage
 
@@ -132,7 +134,7 @@ To build one platform locally (needs Docker):
 bundle exec rb-sys-dock --platform x86_64-linux --build
 ```
 
-The source gem is built with `bundle exec rake build`, which writes `pkg/say_when-<version>.gem`.
+The source gem is built with `bundle exec rake build`, which writes `pkg/say_when_rb-<version>.gem`.
 
 ### Release steps
 

@@ -3,7 +3,7 @@
 require_relative "lib/say_when/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "say_when"
+  spec.name = "say_when_rb"
   spec.version = SayWhen::VERSION
   spec.authors = ["Ismael Celis"]
   spec.email = ["ismaelct@gmail.com"]

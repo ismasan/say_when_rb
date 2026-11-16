@@ -48,7 +48,7 @@ jobs:
         id: cross-gem
         with:
           platform: ${{ matrix.platform }}
-          # Keep in line with required_ruby_version in say_when.gemspec.
+          # Keep in line with required_ruby_version in say_when_rb.gemspec.
           # Rubies outside this list fall back to the source gem.
           ruby-versions: "3.2,3.3,3.4"
       - uses: actions/upload-artifact@v4

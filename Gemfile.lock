@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    say_when (0.1.0)
+    say_when_rb (0.1.0)
       rb_sys (~> 0.9.91)
 
 GEM
@@ -76,7 +76,7 @@ DEPENDENCIES
   rake (~> 13.0)
   rake-compiler
   rspec (~> 3.0)
-  say_when!
+  say_when_rb!
 
 CHECKSUMS
   diff-lcs (1.6.2) sha256=9ae0d2cba7d4df3075fe8cd8602a8604993efc0dfa934cff568969efb1909962
@@ -107,7 +107,7 @@ CHECKSUMS
   rspec-expectations (3.13.6) sha256=bf538ca6d367ff5b0d85a87fdb5c0c6038f2cd1308a0eeba07476caa02d22f35
   rspec-mocks (3.13.9) sha256=ea5c7ff3054a6098ca6039aacef80aec69d5a8a3ef80be8fc88337359b672a30
   rspec-support (3.13.8) sha256=e4160030309b7e3e9d9863dfe720a35dfcc577162f5402cd68fc8c5258a0ffd6
-  say_when (0.1.0)
+  say_when_rb (0.1.0)
   tsort (0.2.0) sha256=9650a793f6859a43b6641671278f79cfead60ac714148aabe4e3f0060480089f
 
 BUNDLED WITH

@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in say_when.gemspec
+# Specify your gem's dependencies in say_when_rb.gemspec
 gemspec
 
 gem "irb"
