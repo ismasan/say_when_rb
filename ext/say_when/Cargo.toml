@@ -1,0 +1,22 @@
+[package]
+name = "say_when"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.90"
+authors = ["Ismael Celis <ismaelct@gmail.com>"]
+license = "MIT"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+magnus = { version = "0.8.2" }
+rb-sys = { version = "0.9", features = ["stable-api-compiled-fallback"] }
+say_when_core = { package = "say-when", version = "=0.1.3", features = ["serde"] }
+serde = { version = "1.0.229", features = ["derive"] }
+serde_magnus = "0.11.0"
+
+[build-dependencies]
+rb-sys-env = "0.2.2"
+

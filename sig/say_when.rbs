@@ -1,0 +1,127 @@
+module SayWhen
+  VERSION: String
+  LOCALES: Array[Symbol]
+  WEEKDAYS: Array[Symbol]
+
+  type date_like = Date | String | Time
+  type clock_like = ClockTime | String | Time
+
+  def self.easter: (Integer year) -> Date?
+  def self.read_clock: (String text, ?after: clock_like?) -> ClockTime?
+
+  class ClockTime
+    attr_reader hour: Integer
+    attr_reader minute: Integer
+    def self.parse: (String text) -> ClockTime
+    def self.coerce: (clock_like value) -> ClockTime
+  end
+
+  class Repeat
+    attr_reader kind: Symbol
+    attr_reader rule: String
+    attr_reader starts: Date
+    attr_reader skipped: Array[Date]
+    def schedule?: () -> bool
+    def after_done?: () -> bool
+  end
+
+  class Reader
+    def initialize: (?locale: Symbol, ?calendar: Hash[Symbol, untyped]?, ?named_dates: Array[Hash[Symbol, untyped]], ?zones: Hash[Symbol, Hash[String, String]]?) -> void
+    def about: (String text) -> Reader
+    def working_day?: (date_like date) -> bool
+    def days: (String text, ?today: date_like) -> Array[DayReading]
+    def day: (String text, ?today: date_like) -> Date?
+    def span: (String text, ?today: date_like) -> SpanReading?
+    def suggest_days: (String typed, ?today: date_like) -> Array[DaySuggestion]
+    def repeats: (String text, ?from: date_like, ?today: date_like) -> Array[RepeatReading]
+    def suggest_repeats: (?from: date_like, ?today: date_like) -> Array[RepeatReading]
+    def describe_repeat: (Repeat | RepeatReading | EventRepeat repeat, ?today: date_like?) -> String
+    def next_days: (Repeat | RepeatReading | EventRepeat repeat, ?from: date_like?, ?limit: Integer) -> Array[Date]
+    def repeat_days: (Repeat repeat, from: date_like, to: date_like) -> Array[Date]
+    def repeats_on?: (Repeat repeat, date_like date) -> bool
+    def last_repeat_day: (Repeat repeat) -> Date?
+    def time: (String text, ?after: clock_like?) -> ClockTime?
+    def offset: (String text) -> String?
+    def offset_from: (String offset, date_like date, ?clock_like? time) -> [Date, ClockTime?]?
+    def event: (String text, ?today: date_like, ?fallback_day: date_like?, ?fallback_time: clock_like, ?default_length: Integer, ?mentions: untyped) -> EventReading
+    def when: (String text, ?today: date_like) -> WhenReading?
+    def corrected: (String typed, ?more: Array[String]) -> String?
+  end
+
+  class DayReading
+    attr_reader day: Date
+    attr_reader how: String?
+    attr_reader about: String?
+  end
+
+  class SpanReading
+    attr_reader first: Date
+    attr_reader last: Date
+    attr_reader kind: Symbol
+    def to_range: () -> Range[Date]
+  end
+
+  class DaySuggestion
+    attr_reader day: Date
+    attr_reader name: String?
+    attr_reader about: String?
+  end
+
+  class RepeatReading
+    attr_reader repeat: Repeat
+    attr_reader how: String
+    attr_reader next_days: Array[Date]
+  end
+
+  class EventRepeat
+    attr_reader repeat: Repeat
+    attr_reader how: String
+  end
+
+  class EventRead
+    attr_reader day: bool
+    attr_reader time: bool
+    attr_reader length: bool
+    attr_reader meal: Symbol?
+  end
+
+  class ReadWord
+    attr_reader start: Integer
+    attr_reader end: Integer
+    attr_reader role: Symbol
+    attr_reader mention: Integer?
+    def text: (String source) -> String
+  end
+
+  class Mention
+    attr_reader written: String
+    attr_reader said: String
+  end
+
+  class EventReading
+    attr_reader title: String
+    attr_reader mentioned: Array[Integer]
+    attr_reader start_day: Date
+    attr_reader end_day: Date
+    attr_reader start_time: ClockTime?
+    attr_reader end_time: ClockTime?
+    attr_reader location: String?
+    attr_reader repeat: EventRepeat?
+    attr_reader time_zone: String?
+    attr_reader read: EventRead
+    attr_reader others: Array[Date]
+    attr_reader words: Array[ReadWord]
+    def all_day?: () -> bool
+  end
+
+  class WhenReading
+    attr_reader start_day: Date
+    attr_reader end_day: Date
+    attr_reader start_time: ClockTime?
+    attr_reader end_time: ClockTime?
+    attr_reader time_zone: String?
+    attr_reader others: Array[Date]
+    attr_reader words: Array[ReadWord]
+    def all_day?: () -> bool
+  end
+end
